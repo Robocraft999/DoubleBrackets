@@ -41,6 +41,7 @@
 	
 	
 	<property name="project.jar.name" value="${project.name}.jar"/>
+	<property name="project.docs" location="docs"/>
 	<property name="project.src" location="src"/>
 	<property name="project.tmp" location="tmp"/>
 	<property name="project.web" location="web"/>
@@ -112,7 +113,8 @@ ${line}
 		<antcall target="generate.distribution" />
 		<antcall target="generate.install.tool" />
 		<antcall target="generate.web" />
-	  	<antcall target="generate.zip" />	
+	  	<antcall target="generate.zip" />
+		<antcall target="webpage.setup"/>
 	  	<delete dir="${project.tmp}"/>
 	</target>
 	
@@ -252,6 +254,11 @@ ${line}
 		<replaceregexp file="${project.dist.version}/web/index.html" match="##examples##" replace="" flags="g" />
 	</target>
 	
+	
+	
+	<target name="webpage.setup">
+		<copydir src="${project.dist.version}" dest="${project.docs}"/>
+	</target>
 	
 	
     <!-- find and replace ##placeholder## keywords in a file -->
