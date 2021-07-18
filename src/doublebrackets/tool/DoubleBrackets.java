@@ -1,5 +1,5 @@
 /**
- * you can put a one sentence description of your tool here.
+ * thanks to Lars Kaltenbach.
  *
  * ##copyright##
  *
@@ -25,12 +25,16 @@
 
 package doublebrackets.tool;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import processing.app.Base;
 import processing.app.tools.Tool;
 import processing.app.ui.Editor;
 
-public class DoubleBracketsTool implements Tool {
+public class DoubleBrackets implements Tool, KeyListener {
 	Base base;
+	BracketCloser bc;
 
 	@Override
 	public String getMenuTitle() {
@@ -40,42 +44,30 @@ public class DoubleBracketsTool implements Tool {
 	@Override
 	public void init(Base base) {
 		this.base = base;
+		bc = new BracketCloser(base);
 	}
 
 	@Override
 	public void run() {
 		Editor editor = base.getActiveEditor();
+		editor.getTextArea().addKeyListener(this);
 		
 		System.out.println("Hello Tool. ##tool.name## ##tool.prettyVersion## by ##author##");
 	}
 
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		bc.update(e.getKeyChar());
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+	}
+
 }
-
-/*
- * // when creating a tool, the name of the main class which implements Tool must
-// be the same as the value defined for project.name in your build.properties
-
-public class HelloTool implements Tool {
-  Base base;
-
-
-  public String getMenuTitle() {
-    return "##tool.name##";
-  }
-
-
-  public void init(Base base) {
-    // Store a reference to the Processing application itself
-    this.base = base;
-  }
-
-
-  public void run() {
-    // Get the currently active Editor to run the Tool on it
-    Editor editor = base.getActiveEditor();
-
-    // Fill in author.name, author.url, tool.prettyVersion and
-    // project.prettyName in build.properties for them to be auto-replaced here.
-    System.out.println("Hello Tool. ##tool.name## ##tool.prettyVersion## by ##author##");
-  }
-}*/
