@@ -1,5 +1,7 @@
 /**
- * thanks to Lars Kaltenbach.
+ * ##sentence##
+ * 
+ * Thanks to Lars Kaltenbach.
  *
  * ##copyright##
  *
@@ -34,7 +36,7 @@ import processing.app.ui.Editor;
 
 public class DoubleBrackets implements Tool, KeyListener {
 	Base base;
-	BracketCloser bc;
+	BracketCloserTool bc;
 
 	@Override
 	public String getMenuTitle() {
@@ -44,7 +46,7 @@ public class DoubleBrackets implements Tool, KeyListener {
 	@Override
 	public void init(Base base) {
 		this.base = base;
-		bc = new BracketCloser(base);
+		bc = new BracketCloserTool(base);
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class DoubleBrackets implements Tool, KeyListener {
 		Editor editor = base.getActiveEditor();
 		editor.getTextArea().addKeyListener(this);
 		
-		System.out.println("Hello Tool. ##tool.name## ##tool.prettyVersion## by ##author##");
+		System.out.println("##tool.name## ##tool.prettyVersion## by ##author## (rework of SpeedTool for Processing 2 (osx) by Lars Kaltenbach)");
 	}
 
 	@Override

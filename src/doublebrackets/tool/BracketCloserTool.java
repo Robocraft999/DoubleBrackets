@@ -1,6 +1,5 @@
 /**
- * you can put a one sentence description of your tool here.
- *
+ * 
  * Lars Kaltenbach, 2013
  *
  * This library is free software; you can redistribute it and/or
@@ -27,7 +26,7 @@ package doublebrackets.tool;
 
 import processing.app.Base;
 
-public class BracketCloser {
+public class BracketCloserTool {
 	Base base;
 	
 	//needed to remove double brackets (when typing too fast) 
@@ -37,10 +36,10 @@ public class BracketCloser {
 	char[] openingChar = { '(', '[', '{', '"', '\'' };
 	char[] closingChar = { ')', ']', '}', '"', '\'' }; 
 	
-	public BracketCloser() {   
+	public BracketCloserTool() {   
 	} 
 	  
-	public BracketCloser(Base _base) { 
+	public BracketCloserTool(Base _base) { 
 		base = _base;
 	}
    
