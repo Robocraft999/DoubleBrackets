@@ -1,0 +1,10 @@
+name = Double Brackets
+authors = [Robocraft999](https://github.com/Robocraft999)
+url = https://github.com/Robocraft999/DoubleBrackets/wiki
+categories = Utilities
+sentence = Better Programming for Processing 3.
+paragraph = A tool to automatically close an opened bracket/curly bracket/quotation mark with another bracket/curly bracket/quotation mark. 
+version = 2  # This must be parsable as an int
+prettyVersion = 0.0.2  # This is treated as a String
+minRevision = 269
+maxRevision = 0
