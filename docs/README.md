@@ -15,7 +15,7 @@ By default the following locations are used for your sketchbook folder:
   * For Mac users, the sketchbook folder is located inside `~/Documents/Processing` 
   * For Windows users, the sketchbook folder is located inside `My Documents/Processing`
 
-Download Double Brackets from https://github.com/Robocraft999/DoubleBrackets/wiki
+Download Double Brackets from https://robocraft999.github.io/DoubleBrackets/
 
 Unzip and copy the contributed tool's folder into the `tools` folder in the Processing sketchbook. You will need to create this `tools` folder if it does not exist.
     
