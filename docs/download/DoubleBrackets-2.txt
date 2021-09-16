@@ -5,6 +5,6 @@ categories = Utilities
 sentence = Better Programming for Processing 3.
 paragraph = A tool to automatically close an opened bracket/curly bracket/quotation mark with another bracket/curly bracket/quotation mark. 
 version = 2  # This must be parsable as an int
-prettyVersion = 1.0.0  # This is treated as a String
+prettyVersion = 1.0.1  # This is treated as a String
 minRevision = 269
 maxRevision = 0
