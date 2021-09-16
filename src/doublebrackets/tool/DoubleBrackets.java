@@ -1,7 +1,7 @@
 /**
  * ##sentence##
  * 
- * Thanks to Lars Kaltenbach.
+ * Thanks to Lars Kaltenbach and dahjon;
  *
  * ##copyright##
  *
@@ -29,14 +29,18 @@ package doublebrackets.tool;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
+import java.util.List;
 
 import processing.app.Base;
 import processing.app.tools.Tool;
 import processing.app.ui.Editor;
+import processing.core.PApplet;
 
 public class DoubleBrackets implements Tool, KeyListener {
 	Base base;
-	BracketCloserTool bc;
+    Editor editor;
+	List<Character> openingChar = Arrays.asList( '(', '[', '{', '"', '\'', '<' );
 
 	@Override
 	public String getMenuTitle() {
@@ -46,29 +50,81 @@ public class DoubleBrackets implements Tool, KeyListener {
 	@Override
 	public void init(Base base) {
 		this.base = base;
-		bc = new BracketCloserTool(base);
 	}
 
 	@Override
 	public void run() {
-		Editor editor = base.getActiveEditor();
+		editor = base.getActiveEditor();
 		editor.getTextArea().addKeyListener(this);
 		
-		System.out.println("##tool.name## ##tool.prettyVersion## by ##author## (rework of SpeedTool for Processing 2 (osx) by Lars Kaltenbach)");
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		
+		System.out.println("##tool.name## ##tool.prettyVersion## by ##author## (rework of SpeedTool for Processing 2 (osx) by Lars Kaltenbach "
+				+ "with the help of Macros from ExtendedCodeCompletion by dahjon)");
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		bc.update(e.getKeyChar());
+		char c = e.getKeyChar();
+		if(openingChar.contains(c) || c == PApplet.ENTER) {
+			e.consume();
+			//String txt = getTextBeforeCaret();
+			//System.out.println("txt = '" + txt + "'");
+			String txt = ""+c;
+			int indent = getSpacesBeforeText(txt.length());
+			//System.out.println("indent = " + indent);
+			Macros m = Macros.find(editor, txt);
+			if (m != null) {
+				m.insert(editor, indent);
+			}
+		}
 	}
+	
+    private int getSpacesBeforeText(int textLen) {
+        int start = editor.getCaretOffset() - 1 - textLen;
+        int i = start;
+        String edtext = editor.getText();
+        if (start >= 0) {
+            char c = edtext.charAt(start);
+            while (c == ' ' && i >= 0) {
+                //System.out.println("i = " + i+" c = " + c);
+                i--;
+                if (i >= 0) {
+                    c = editor.getText().charAt(i);
+                }
+            }
+        }
+
+        return start - i;
+    }
+
+    private String getTextBeforeCaret() {
+        int start = editor.getCaretOffset() - 1;
+        if (start >= 0) {
+            //System.out.println("start = " + start);
+            int i = start;
+            String edtext = editor.getText();
+            System.out.println("edtext = " + edtext);
+            //System.out.println("edtext.length() = " + edtext.length());
+            char c = edtext.charAt(start);
+            while (!openingChar.contains(c) && i >= 0) {
+                i--;
+                if (i >= 0) {
+                    c = editor.getText().charAt(i);
+                }
+            }
+            i++;
+            return editor.getText().substring(i, start + 1);
+        } else {
+            return "";
+        }
+    }
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		
+	}
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
 		
 	}
 
